@@ -25,10 +25,25 @@ end
    puts "#{player_one} kindly choose a number between 1-9"
    player_one_choice = gets.chomp
 
-   board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+   board = [1, "X", 3, 4, 5, 6, 7, 8, 9]
    puts " #{board[0]} | #{board[1]} | #{board[2]} "
    puts "-----------"
    puts " #{board[3]} | #{board[4]} | #{board[5]} "
    puts "-----------"
    puts " #{board[6]} | #{board[7]} | #{board[8]} "
-   
+
+   puts "Your move has been displayed on board!"
+   puts "#{player_two} it now your turn. kindly choose a number between 1-9"
+   player_two_choice = gets.chomp
+
+   board = [1, "x", 3, 4, 5, 6, "o", 8, 9]
+   puts " #{board[0]} | #{board[1]} | #{board[2]} "
+   puts "-----------"
+   puts " #{board[3]} | #{board[4]} | #{board[5]} "
+   puts "-----------"
+   puts " #{board[6]} | #{board[7]} | #{board[8]} "
+
+   puts "Your move has been displayed on board!"
+
+  
+
