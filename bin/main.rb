@@ -1,31 +1,34 @@
 #!/usr/bin/env ruby
-human_player = "X"
-comp_player = "O"
-
 puts "Welcome to Tic Tact Toe!"
 
-puts "Choose from 1 to 9"
-user_input = gets.chomp
+player_one = player_one
+player_two = player_two
 
-board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-def display_board
-   puts row = ["   " "|" "   " "|" "   "]
-   puts separator = "-----------"
-   puts row
-   puts separator
-   puts row
- end
+puts "Kindly choose one: X or O?"
+player = gets.chomp.downcase
 
- def display_board(board)
+if player == "x"
+   puts "Welcome on board! You are #{player_one}"
+elsif player == "o"
+   puts "Welcome on board! You are #{player_two}"   
+end
+
+ board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+ 
    puts " #{board[0]} | #{board[1]} | #{board[2]} "
    puts "-----------"
    puts " #{board[3]} | #{board[4]} | #{board[5]} "
    puts "-----------"
    puts " #{board[6]} | #{board[7]} | #{board[8]} "
-end
-display_board(board)
+   
 
+   puts "#{player_one} kindly choose a number between 1-9"
+   player_one_choice = gets.chomp
 
-def input_to_index(user_input)
-   user_input.to_i - 1
-end
+   board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+   puts " #{board[0]} | #{board[1]} | #{board[2]} "
+   puts "-----------"
+   puts " #{board[3]} | #{board[4]} | #{board[5]} "
+   puts "-----------"
+   puts " #{board[6]} | #{board[7]} | #{board[8]} "
+   
