@@ -58,7 +58,7 @@ while count <= 1
     loop do
       puts("\nPlayer #{i} It's your turn\n(choose between 1-9):")
       choice = STDIN.gets.chomp.to_i
-
+      # validate player move and choice
       if game.player_choice?(choice)
         if !game.pos_taken?(choice)
           game.board_update(choice, player)
