@@ -61,7 +61,7 @@ while count <= 1
           break
           # Check for winning,draw condition
           if player_one.wins > player_two.wins
-            puts  'Player_one wins!'
+            puts 'Player_one wins!'
           elsif player_two.wins > player_one.wins
             puts 'Player_two wins!'
           else
