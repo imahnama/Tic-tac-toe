@@ -33,6 +33,7 @@ current_player = player_one
 board = Board.new(current_player, player_one, player_two)
 puts board.display_board
 game_on = true
+
 while game_on
   puts "#{board.current_player.name} select a Position between (1-9)"
   player_pos = gets.chomp.to_i
