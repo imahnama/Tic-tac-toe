@@ -1,9 +1,10 @@
 class Board
 
- attr_reader :current_player, :other_player
+ attr_reader
   def initialize(current_player= nil, player_one = nil, player_two=nil)
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     @final_array = []
+    @current_player = current_player
     @player_one = player_one
     @player_two = player_two
     @win_arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
@@ -40,8 +41,8 @@ class Board
     @winner
   end
 
-  def switch_player
-    current_player = current_player == @player_one ? @player_two : @player_one
+  def switch_player(current_player)
+    @current_player = @current_player == @player_one ? @player_two : @player_one
 end
 
 end

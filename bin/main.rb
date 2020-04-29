@@ -48,6 +48,6 @@ while game_on
     break
   end
   count += 1
- board.switch_player
+ board.switch_player(current_player)
   return puts "It's a Draw!!" if count == 9
 end
