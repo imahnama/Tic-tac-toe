@@ -5,7 +5,7 @@ class Player
     @chip = chip
   end
 
-    def get_chip(chip)
-      chip == 'x' ? 'o' : 'x'
-    end
+  def get_chip(chip)
+    chip == 'x' ? 'o' : 'x'
+  end
 end

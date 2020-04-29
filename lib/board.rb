@@ -1,25 +1,25 @@
 class Board
-attr_reader :current_player, :player_one, :player_two
+  attr_reader :current_player, :player_one, :player_two
 
-WIN_ARR = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
-            [1, 4, 7], [2, 5, 8], [3, 6, 9],
-            [1, 5, 9], [3, 5, 7]]
+  WIN_ARR = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
+             [1, 4, 7], [2, 5, 8], [3, 6, 9],
+             [1, 5, 9], [3, 5, 7]].freeze
 
-  def initialize(current_player= nil, player_one = nil, player_two=nil)
+  def initialize(current_player = nil, player_one = nil, player_two = nil)
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     @current_player = current_player
     @player_one = player_one
     @player_two = player_two
     @final_array = []
-
   end
 
   def display_board(_choice = nil, _current_player = nil)
-    "#{@board[0]} | #{@board[1]} | #{@board[2]}\n---------\n#{@board[3]} | #{@board[4]} | #{@board[5]}\n---------\n#{@board[6]} | #{@board[7]} | #{@board[8]} "
+    " #{@board[0]} | #{@board[1]} | #{@board[2]}
+ ---------\n #{@board[3]} | #{@board[4]} | #{@board[5]}
+ ---------\n #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
 
-  def board_update( choice)
-
+  def board_update(choice)
     @board[choice - 1] = @current_player.chip
   end
 
@@ -28,7 +28,6 @@ WIN_ARR = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
   end
 
   def wins?(choice)
-
     @final_array.push(choice)
     @winner = false
     WIN_ARR.each do |arr|
@@ -39,6 +38,5 @@ WIN_ARR = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
 
   def switch_player
     @current_player = @current_player == @player_one ? @player_two : @player_one
-end
-
+  end
 end
