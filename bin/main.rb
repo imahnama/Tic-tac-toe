@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative '../lib/game.rb'
+require_relative '../lib/player.rb'
 require_relative '../lib/board.rb'
 
 puts 'Welcome to tic-tac-toe game!'
@@ -40,14 +40,14 @@ while game_on
     player_pos = gets.chomp.to_i
   end
 
-  board.board_update(board, player_pos, current_player.chip)
+  board.board_update(player_pos, current_player.chip)
   puts board.display_board
-  if current_player.wins?(player_pos)
+  if board.wins?(player_pos)
     game_on = false
-    puts "Congratulations#{current_player.name} You are a Tic Tac Toe Master!"
+    puts "Congratulations#{ current_player.name} You are a Tic Tac Toe Master!"
     break
   end
   count += 1
-  current_player = current_player == player_one ? player_two : player_one
+ board.switch_player
   return puts "It's a Draw!!" if count == 9
 end
