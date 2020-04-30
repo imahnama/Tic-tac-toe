@@ -30,6 +30,7 @@ puts "Hello #{name2}, your chip is #{chip2}!"
 count = 0
 
 current_player = player_one
+current_move = player_one.moves_history
 board = Board.new(current_player, player_one, player_two)
 puts board.display_board
 game_on = true
@@ -41,13 +42,20 @@ while game_on
     puts board.display_board
     player_pos = gets.chomp.to_i
   end
+  move = player_pos
+  current_move << move
+  player_moves_sorted = current_move.sort.join
   board.board_update(player_pos)
   puts board.display_board
-  if board.wins?(player_pos)
+  if board.wins?(player_moves_sorted)
     game_on = false
     puts "Congratulations #{board.current_player.name} You are a Tic Tac Toe Master!"
     break
+  elsif count >= 8
+    game_on = false
+    puts 'Its a draw!'
   end
   count += 1
   board.switch_player
+  current_move = current_move == player_one.moves_history ? player_two.moves_history : player_one.moves_history
 end

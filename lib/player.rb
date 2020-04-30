@@ -1,9 +1,10 @@
 class Player
-  attr_reader :name, :chip
-  def initialize(name = nil, chip = nil, player_pos = nil)
+  attr_reader :name, :chip, :moves_history
+  attr_writer :moves_history
+  def initialize(name = nil, chip = nil)
     @name = name
     @chip = chip
-    @player_pos = player_pos
+    @moves_history = []
   end
 
   def get_chip(chip)
