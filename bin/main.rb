@@ -59,3 +59,4 @@ while game_on
   board.switch_player
   current_move = current_move == player_one.moves_history ? player_two.moves_history : player_one.moves_history
 end
+
