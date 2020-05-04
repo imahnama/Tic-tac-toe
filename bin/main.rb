@@ -1,76 +1,61 @@
 #!/usr/bin/env ruby
-# Welcome user to the game
-puts 'Welcome to Tic Tac Toe!'
-# create game board
-class Board
-  def initialize
-    @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  end
- # display board
-  def display_board
-    puts   "\n#{@board[0]} | #{@board[1]} | #{@board[2]}"
-    puts   "\n---------"
-    puts   "\n#{@board[3]} | #{@board[4]} | #{@board[5]}"
-    puts   "\n---------"
-    puts   "\n#{@board[6]} | #{@board[7]} | #{@board[8]} "
-  end
- # assigning player chips
-  def board_update(choice, player)
-    choice -= 1
-    @board[choice] = (player == "one" ? 'x' : 'o')
-  end
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
+
+puts 'Welcome to tic-tac-toe game!'
+player_chip = Player.new
+puts 'Enter Player_one name:'
+name1 = gets.chomp
+until /[a-z]/.match(name1)
+  puts 'Enter Valid name'
+  name1 = gets.chomp
 end
-class Instructions < Board
-  # validate player choice
-  def player_choice? (choice)
-    choice.between?(1,9)
-  end
- # make a move and validate it
-  def pos_taken?(choice)
-    @board[choice - 1] == 'x' || @board[choice - 1] == 'o'
-  end
-    # game informs player if selected move is a winning move
-  def win?
-    "\nPlayer #{player} is our Tic Tac Toe Master!"
-  end
-# game informs player if selected move is a draw
-  def draw
-    "\n Its a draw!"
-  end
+puts 'Please select X or O'
+chip1 = gets.chomp.downcase
+until %w[o x].include?(chip1)
+  puts 'Enter a valid choice'
+  chip1 = gets.chomp.downcase
 end
-game = Instructions.new
-game.display_board
+puts 'Enter Player_two name:'
+name2 = gets.chomp
+until /[a-z]/.match(name2)
+  puts 'Enter Valid name'
+  name2 = gets.chomp
+end
+chip2 = player_chip.get_chip(chip1)
+player_one = Player.new(name1, chip1)
+player_two = Player.new(name2, chip2)
+puts "Hello #{name1}, your chip is #{chip1}!"
+puts "Hello #{name2}, your chip is #{chip2}!"
 count = 0
+
+current_player = player_one
+current_move = player_one.moves_history
+board = Board.new(current_player, player_one, player_two)
+puts board.display_board
 game_on = true
-# game repeats all actions for player's moves
-while count <= 1
-  %w[one two].each do |i|
-    player = i
-    loop do
-      puts("\nPlayer_#{i} It's your turn\n(choose between 1-9):")
-      choice = gets.chomp.to_i
-      if game.player_choice?(choice)
-        if !game.pos_taken?(choice)
-          game.board_update(choice,player)
-          game.display_board
-          break
-          #Check for winning condition
-          if player_one.wins > player_two.wins
-            puts player_one + " wins!"
-          elsif player_two.wins > player_one.wins
-            puts player_two + " wins!"
-          else
-             puts "You tied!"
-          end
-          game_on = false
-        end
-          puts "\nIt's a win, congratulations player_one!"
-        else
-          puts "\nPostion already taken, make another move"
-      end
-    end
+while game_on
+  puts "#{board.current_player.name} select a Position between (1-9)"
+  player_pos = gets.chomp.to_i
+  until board.position_taken?(player_pos)
+    puts 'Enter a valid position between 1-9:'
+    puts board.display_board
+    player_pos = gets.chomp.to_i
   end
-  puts "end of round #{count}"
+  move = player_pos
+  current_move << move
+  player_moves_sorted = current_move.sort.join
+  board.board_update(player_pos)
+  puts board.display_board
+  if board.wins?(player_moves_sorted)
+    game_on = false
+    puts "Congratulations #{board.current_player.name} You are a Tic Tac Toe Master!"
+    break
+  elsif count >= 8
+    game_on = false
+    puts 'Its a draw!'
+  end
   count += 1
+  board.switch_player
+  current_move = current_move == player_one.moves_history ? player_two.moves_history : player_one.moves_history
 end
-puts 'Congratulations Player_one You are a Tic Tac Toe Master!'
